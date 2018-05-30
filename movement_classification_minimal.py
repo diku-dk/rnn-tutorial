@@ -30,12 +30,8 @@ inputs = tf.placeholder(tf.float32, [None, None, d])
 target = tf.placeholder(tf.float32, [None, m])
 
 # network architecture
-N_1 = 32  # number of units in first recurrent layer
-N_2 = 32  # number of units in second recurrent layer
-
-rnn_layers = [tf.nn.rnn_cell.GRUCell(N) for N in [N_1, N_2]]
-rnn_units = tf.nn.rnn_cell.MultiRNNCell(rnn_layers)
-    
+N = 64
+rnn_units = tf.nn.rnn_cell.GRUCell(N) 
 rnn_output, _ = tf.nn.dynamic_rnn(rnn_units, inputs, dtype=tf.float32)
 
 # ignore all but the last timesteps
