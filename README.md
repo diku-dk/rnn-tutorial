@@ -38,7 +38,14 @@ Example for modelling long time series using LSTM units (section 4.2). The RNN i
 
 ## [custom_gru_mnist.py](custom_gru_mnist.py)
 
+Example of a custom GRU cell, which also outputs the values of the gates. As a toy example, we consider learning to classify handwritten digits, where the network sees one pixel row per time step.
+
+This example is based on the MNIST data:
+
+Y. LeCun and C. Cortes. [MNIST handwritten digit database](http://yann.lecun.com/exdb/mnist/).
+
+
+## [char_rnn.py](char_rnn.py)
+
 Example of a custom GRU cell, which also outputs the values of the gates. As a toy example, we consider learning to classify  handwritten digits,  where the network sees one pixel row per time step.
-
-
 
