@@ -41,12 +41,12 @@ class CustomGRU(tf.contrib.rnn.RNNCell):
     gates = tf.layers.dense(
       tf.concat([state, input_], axis=1),
                 2 * self._size, tf.nn.sigmoid,
-                bias_initializer=tf.constant_initializer(-1.0))
+                bias_initializer=tf.constant_initializer(1.0))
     reset, update = tf.split(gates, 2, axis=1)
     candidate = tf.layers.dense(
       tf.concat([reset * state, input_], axis=1),
                 self._size, self._activation)
-    new_state = (1.0 - update) * state + update * candidate
+    new_state = update * state + (1.0 - update) * candidate
     output = (new_state, reset, update)
     return output, new_state
 
@@ -88,22 +88,22 @@ def main():
   optimize = optimizer.apply_gradients(zip(gradients, variables))
 
   tf.logging.set_verbosity(tf.logging.ERROR)  # suppress warnings about deprecated stuff
-  mnist = input_data.read_data_sets('~/.dataset/tf_mnist/', one_hot=True)
+  mnist = input_data.read_data_sets('data', one_hot=True)
   tf.logging.set_verbosity(tf.logging.INFO)
 
   sess = tf.Session()
   sess.run(tf.global_variables_initializer())
   print('Start training')
   for epoch in range(10):
-    for index in range(60000 // 100 // 10):
+    for index in range(mnist.train.num_examples // 100):
       batch = mnist.train.next_batch(100)
       sess.run(optimize, {
           images: batch[0].reshape((-1, 28, 28)),
           labels: batch[1],
           training: True})
     train_error = sess.run(error, {
-        images: mnist.train.images[:10000].reshape((-1, 28, 28)),
-        labels: mnist.train.labels[:10000]})
+        images: mnist.train.images.reshape((-1, 28, 28)),
+        labels: mnist.train.labels})
     test_error = sess.run(error, {
         images: mnist.test.images.reshape((-1, 28, 28)),
         labels: mnist.test.labels})
