@@ -47,5 +47,5 @@ Y. LeCun and C. Cortes. [MNIST handwritten digit database](http://yann.lecun.com
 
 ## [char_rnn.py](char_rnn.py)
 
-Example of a custom GRU cell, which also outputs the values of the gates. As a toy example, we consider learning to classify  handwritten digits,  where the network sees one pixel row per time step.
+Network for character-level language modeling. You have to feed it your own data.
 
