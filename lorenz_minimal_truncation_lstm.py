@@ -41,10 +41,8 @@ cell = tf.nn.rnn_cell.BasicLSTMCell(N)
 # A state with all variables set to zero
 zero_state = cell.zero_state(n, tf.float32)
 # State
-state =  nest.map_structure(lambda tensor:
-                            tf.Variable(tensor, trainable=False),
-                            zero_state)
-
+state =  nest.map_structure(
+    lambda tensor: tf.Variable(tensor, trainable=False), zero_state)
 
 # RNN
 rnn_output, new_state = tf.nn.dynamic_rnn(cell, inputs,

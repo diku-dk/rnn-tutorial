@@ -42,8 +42,8 @@ logits = tf.layers.dense(last, m, activation=None)
 # Output mapped to probabilities by softmax
 prediction = tf.nn.softmax(logits)
 # Error function
-loss = tf.reduce_mean(
-    tf.nn.softmax_cross_entropy_with_logits_v2(labels=target, logits=logits))
+loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(
+    labels=target, logits=logits))
 # 0-1 loss; compute most likely class and compare with target
 accuracy = tf.equal(tf.argmax(logits,1), tf.argmax(target,1))
 # Average 0-1 loss
