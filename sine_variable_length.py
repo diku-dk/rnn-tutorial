@@ -112,8 +112,8 @@ with tf.Session() as sess:
 
     # Do the learning
     for i in range(epochs):
-        sess.run(train_step,
-            feed_dict={inputs: train_X, target: train_Y, lengths: train_lengths})
+        sess.run(train_step, feed_dict={
+            inputs: train_X, target: train_Y, lengths: train_lengths})
         if i==0 or (i+1)%100==0:
             temp_loss = sess.run(loss,
                 feed_dict={
