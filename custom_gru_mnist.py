@@ -11,6 +11,7 @@ import tensorflow as tf
 
 
 class CustomGRU(tf.contrib.rnn.RNNCell):
+  """GRU that also returns gate values."""
 
   def __init__(
       self, size,
@@ -52,6 +53,7 @@ class CustomGRU(tf.contrib.rnn.RNNCell):
 
 
 def visualize_gates(mnist, gates):
+  """Plot input image and gate values."""
   fig, ax = plt.subplots(
       gates[0].shape[0], 3, figsize=(4, gates[0].shape[0]))
   ax[0, 0].set_title('Image')
@@ -70,6 +72,7 @@ def visualize_gates(mnist, gates):
 
 
 def main():
+  """Custom GRU applied to MNIST."""
   images = tf.placeholder(tf.float32, [None, 28, 28])
   labels = tf.placeholder(tf.float32, [None, 10])
   training = tf.placeholder_with_default(False, [])
@@ -87,7 +90,7 @@ def main():
   gradients, _ = tf.clip_by_global_norm(gradients, 100.0)
   optimize = optimizer.apply_gradients(zip(gradients, variables))
 
-  tf.logging.set_verbosity(tf.logging.ERROR)  # suppress warnings about deprecated stuff
+  tf.logging.set_verbosity(tf.logging.ERROR)  # Suppress warnings about deprecated stuff
   mnist = input_data.read_data_sets('data', one_hot=True)
   tf.logging.set_verbosity(tf.logging.INFO)
 
