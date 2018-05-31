@@ -66,7 +66,7 @@ print("predicting previous input, train: ", mse)
 inputs  = tf.placeholder(tf.float32, [None, None, d])
 targets = tf.placeholder(tf.float32, [None, None, m])
 
-# Aetwork architecture
+# Network architecture
 cell = tf.nn.rnn_cell.GRUCell(N)
 
 # A state with all variables set to zero
