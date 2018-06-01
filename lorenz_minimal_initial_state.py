@@ -1,5 +1,5 @@
 """Time series modelling example showing how to set initial state.
-    
+
     Supplementary code for:
     D. Hafner and C. Igel. "Signal Processing with Recurrent Neural Networks in TensorFlow"
     """
@@ -105,8 +105,8 @@ with tf.Session() as sess:
             print(i+1, ' Loss =', temp_loss)
 
     # Visualize modelling of training data
-    model, final_state = sess.run([prediction, new_state],
-                                  feed_dict={inputs: train_X})
+    model, final_state = sess.run([prediction, new_state], feed_dict={
+        inputs: train_X})
     generate_plot([train_X, train_Y, model], 'lorenzTrain.pdf')
 
     # Visualize modelling of test data
@@ -114,8 +114,7 @@ with tf.Session() as sess:
     generate_plot([test_X, test_Y, model], 'lorenzTestZero.pdf')
 
     # Visualize modelling of test data starting from zero state
-    model, loss = sess.run([prediction, loss],
-                           feed_dict={inputs: test_X, targets: test_Y,
-                                        external_state: final_state})
+    model, loss = sess.run([prediction, loss], feed_dict={
+        inputs: test_X, targets: test_Y, external_state: final_state})
     print("RNN MSE on test set:", loss)
     generate_plot([test_X, test_Y, model], 'lorenzTestFinal.pdf')
