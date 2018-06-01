@@ -18,7 +18,7 @@ def generate_plot(time_series, filename, plot_input=False):
         plt.plot(time_series[0][0,:,0], label='input', color='lightgray', linestyle=':', linewidth=3)
     plt.rc('font', size=14)
     plt.plot(time_series[1][0,:,0], label='target', linestyle='-', linewidth=3)
-    plt.plot(time_series[2][0,:,0], label='model', linestyle='-', linewidth=3)
+    plt.plot(time_series[2][0,:,0], label='prediction', linestyle='-', linewidth=3)
     plt.legend(loc=9)
     plt.xlabel('time [t]')
     plt.ylabel('signal')
