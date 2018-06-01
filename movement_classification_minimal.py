@@ -31,11 +31,11 @@ target = tf.placeholder(tf.float32, [None, m])
 
 # Network architecture
 N = 64
-rnn_units = tf.nn.rnn_cell.GRUCell(N) 
+rnn_units = tf.nn.rnn_cell.GRUCell(N)
 rnn_output, _ = tf.nn.dynamic_rnn(rnn_units, inputs, dtype=tf.float32)
 
 # Ignore all but the last timesteps
-last = tf.gather(rnn_output, T-1, axis=1)
+last = tf.gather(rnn_output, T - 1, axis=1)
 
 # Fully connected layer
 logits = tf.layers.dense(last, m, activation=None)
@@ -45,7 +45,7 @@ prediction = tf.nn.softmax(logits)
 loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(
     labels=target, logits=logits))
 # 0-1 loss; compute most likely class and compare with target
-accuracy = tf.equal(tf.argmax(logits,1), tf.argmax(target,1))
+accuracy = tf.equal(tf.argmax(logits, 1), tf.argmax(target, 1))
 # Average 0-1 loss
 accuracy = tf.reduce_mean(tf.cast(accuracy, tf.float32))
 # Optimizer
@@ -59,7 +59,7 @@ with tf.Session() as sess:
     # Do the learning
     for i in range(epochs):
         sess.run(train_step, feed_dict={inputs: train_X, target: train_Y})
-        if (i+1)%10==0:
-            tmp_loss, tmp_acc = sess.run([loss,accuracy],feed_dict={inputs: train_X, target: train_Y})
-            tmp_acc_test = sess.run(accuracy,feed_dict={inputs: test_X, target: test_Y})
-            print(i+1, 'Loss:', tmp_loss, 'Accuracy, train:', tmp_acc, ' Accuracy, test:', tmp_acc_test)
+        if (i + 1) % 10 == 0:
+            tmp_loss, tmp_acc = sess.run([loss, accuracy], feed_dict={inputs: train_X, target: train_Y})
+            tmp_acc_test = sess.run(accuracy, feed_dict={inputs: test_X, target: test_Y})
+            print(i + 1, 'Loss:', tmp_loss, 'Accuracy, train:', tmp_acc, ' Accuracy, test:', tmp_acc_test)

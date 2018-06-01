@@ -1,5 +1,5 @@
 """Time series modelling example.
-    
+
     Supplementary code for:
     D. Hafner and C. Igel. "Signal Processing with Recurrent Neural Networks in TensorFlow"
     """
@@ -33,7 +33,7 @@ inputs  = tf.placeholder(tf.float32, [None, None, d])
 targets = tf.placeholder(tf.float32, [None, None, m])
 
 # Network architecture
-cell = tf.nn.rnn_cell.GRUCell(N)  # A layer of N cells
+cell = tf.nn.rnn_cell.GRUCell(N)  # A recurrent layer of N units
 rnn_output, state = tf.nn.dynamic_rnn(cell, inputs, dtype=tf.float32)
 
 # Note the following reshaping:

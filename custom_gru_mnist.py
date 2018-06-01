@@ -1,9 +1,9 @@
 """
-    Custom GRU that allows easy gate visualization.
+Custom GRU that allows easy gate visualization.
 
-    Supplementary code for:
-    D. Hafner and C. Igel. "Signal Processing with Recurrent Neural Networks in TensorFlow"
-    """
+Supplementary code for:
+D. Hafner and C. Igel. "Signal Processing with Recurrent Neural Networks in TensorFlow"
+"""
 
 from tensorflow.examples.tutorials.mnist import input_data
 import matplotlib.pyplot as plt
@@ -23,16 +23,16 @@ class CustomGRU(tf.contrib.rnn.RNNCell):
         self._initializer = initializer
 
     @property
-    # The state of a GRU is just its last output, which is of
-    # the size of the layer.
     def state_size(self):
+        # The state of a GRU is just its last output, which is of
+        # the size of the layer.
         return self._size
 
     @property
-    # Our cell returns the GRU state, as well as the values of
-    # the reset and update gates. All three tensors are of the
-    # size of the GRU layer.
     def output_size(self):
+        # Our cell returns the GRU state, as well as the values of
+        # the reset and update gates. All three tensors are of the
+        # size of the GRU layer.
         return (self._size, self._size, self._size)
 
     def call(self, input_, state):
@@ -40,13 +40,13 @@ class CustomGRU(tf.contrib.rnn.RNNCell):
         # reset and update gates. This means we need to split the
         # output of the layer into two tensors.
         gates = tf.layers.dense(
-          tf.concat([state, input_], axis=1),
-                    2 * self._size, tf.nn.sigmoid,
-                    bias_initializer=tf.constant_initializer(1.0))
+            tf.concat([state, input_], axis=1),
+            2 * self._size, tf.nn.sigmoid,
+            bias_initializer=tf.constant_initializer(1.0))
         reset, update = tf.split(gates, 2, axis=1)
         candidate = tf.layers.dense(
-          tf.concat([reset * state, input_], axis=1),
-                    self._size, self._activation)
+            tf.concat([reset * state, input_], axis=1),
+            self._size, self._activation)
         new_state = update * state + (1.0 - update) * candidate
         output = (new_state, reset, update)
         return output, new_state
@@ -90,7 +90,7 @@ def main():
     gradients, _ = tf.clip_by_global_norm(gradients, 100.0)
     optimize = optimizer.apply_gradients(zip(gradients, variables))
 
-    tf.logging.set_verbosity(tf.logging.ERROR)  # Suppress warnings about deprecated stuff
+    tf.logging.set_verbosity(tf.logging.ERROR)  # Suppress deprecation warnings
     mnist = input_data.read_data_sets('data', one_hot=True)
     tf.logging.set_verbosity(tf.logging.INFO)
 
