@@ -50,7 +50,7 @@ def generate_plot(time_series, filename, plot_input=False):
         if plot_input:
             ax[i].plot(time_series[0][i], label='input', color='lightgray', linestyle='--', linewidth=3)
         ax[i].plot(time_series[1][i], label='target', linestyle='-', linewidth=3)
-        ax[i].plot(time_series[2][i], label='model', linestyle='-', linewidth=3)
+        ax[i].plot(time_series[2][i], label='prediction', linestyle='-', linewidth=3)
         ax[i].set_yticks([0])
         ax[i].set_yticks([0])
     plt.rc('font', size=14)
