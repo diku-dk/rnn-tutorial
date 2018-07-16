@@ -11,10 +11,10 @@ import tensorflow as tf
 import numpy as np
 
 # Load data
-train_X = np.load('data/UCIHARtrainX.npy')
-test_X  = np.load('data/UCIHARtestX.npy')
-train_Y = np.load('data/UCIHARtrainY.npy')
-test_Y  = np.load('data/UCIHARtestY.npy')
+train_X = np.load('data/UCIHARTrainX.npy')
+test_X  = np.load('data/UCIHARTestX.npy')
+train_Y = np.load('data/UCIHARTrainY.npy')
+test_Y  = np.load('data/UCIHARTestY.npy')
 
 # Parameters
 n = train_X.shape[0]  # Number of training sequences

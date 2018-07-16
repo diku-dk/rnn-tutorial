@@ -104,12 +104,13 @@ with tf.Session() as sess:
     sess.run(reset_state)
     concatenated = []
     for chunk_start in range (0, T, chunk_size):
-        sess.run([prediction, new_state], feed_dict={
+        model, _ = sess.run([prediction, new_state], feed_dict={
             inputs: train_X[:, chunk_start: chunk_start + chunk_size]})
-        concatenated.append(prediction)
-    # plt.plot(train_X[0,:,0], label='input', color='lightgray', linestyle=':')
+        concatenated.append(model)
+    model = np.stack(concatenated, axis=0)
+    model = np.reshape(model, model.size)
     plt.plot(train_Y[0,:,0], label='target', linestyle='-', linewidth=3)
-    plt.plot(concatenated[0,:,0], label='model', linestyle='-', linewidth=3)
+    plt.plot(model, label='model', linestyle='-', linewidth=3)
     plt.legend(loc=1)
     plt.xlabel('time [t]')
     plt.ylabel('signal')
