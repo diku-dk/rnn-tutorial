@@ -52,8 +52,8 @@ Network for character-level language modeling. You have to feed it your own data
 To train the RNN, pass `--mode training` to the script and point to a text file
 with one document per line using `--corpus /path/to/corpus.txt`. Moreover, you
 need to specify a directory for saving model checkpoints using `--logdir
-/path/to/logdir`. Additional options are available to change important hyper
-parameters, such as the batch size, chunk length, learning rate, and network
+/path/to/logdir`. Additional options are available to change important 
+hyperparameters, such as the batch size, chunk length, learning rate, and network
 size.
 
 After training the model, you can generate text from it using `--mode sampling`
